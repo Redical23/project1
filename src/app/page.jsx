@@ -1,4 +1,5 @@
 // pages/index.js
+"use client"
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useState } from "react";
 
