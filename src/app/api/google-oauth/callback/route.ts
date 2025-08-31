@@ -33,5 +33,5 @@ export async function GET(req: NextRequest) {
   // Here you should save tokens in DB for the user (e.g., Supabase, MongoDB)
   console.log("User Google tokens:", data);
 
-  return NextResponse.redirect(new URL("/success", req.url));
+  return NextResponse.redirect(new URL("/su", req.url));
 }
