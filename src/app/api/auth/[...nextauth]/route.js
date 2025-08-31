@@ -1,3 +1,6 @@
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+
 const authOptions = {
   providers: [
     GoogleProvider({
@@ -12,7 +15,6 @@ const authOptions = {
       },
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,   // 👈 important
   callbacks: {
     async jwt({ token, account }) {
       if (account) {
@@ -28,4 +30,9 @@ const authOptions = {
     },
   },
   session: { strategy: "jwt" },
+  secret: process.env.NEXTAUTH_SECRET, // ✅ Fix: required for cookies
 };
+
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
