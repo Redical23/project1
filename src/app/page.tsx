@@ -4,7 +4,8 @@
 import Image from "next/image";
 
 export default function Home() {
-  const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=426029757498-e2h60b5m0fretoj56judho6j906n7lea.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Frrishi-connect.vercel.app%2Foauth2%2Fcallback&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com/auth/calendar&access_type=offline&prompt=consent`;
+const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=...&redirect_uri=${encodeURIComponent(process.env.NEXT_PUBLIC_BASE_URL + "/api/oauth2/callback")}&response_type=code&scope=https://www.googleapis.com/auth/calendar&access_type=offline&prompt=consent`;
+
 
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
