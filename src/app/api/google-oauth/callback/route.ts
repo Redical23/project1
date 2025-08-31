@@ -1,4 +1,4 @@
-// src/app/api/oauth2/callback/route.ts
+// src/app/api/google-oauth/callback/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
 
   const client_id = process.env.GOOGLE_CLIENT_ID!;
   const client_secret = process.env.GOOGLE_CLIENT_SECRET!;
-  const redirect_uri = "https://rrishi-connect.vercel.app/api/oauth2/callback";
+  const redirect_uri = `${process.env.NEXT_PUBLIC_BASE_URL}/api/google-oauth/callback`;
 
   const params = new URLSearchParams({
     code,
@@ -28,10 +28,7 @@ export async function GET(req: NextRequest) {
   });
 
   const data = await tokenResponse.json();
+  console.log("Google tokens:", data);
 
-  // data contains access_token, refresh_token, expires_in
-  // Here you should save tokens in DB for the user (e.g., Supabase, MongoDB)
-  console.log("User Google tokens:", data);
-
-  return NextResponse.redirect(new URL("/su", req.url));
+  return NextResponse.redirect(new URL("/sc", req.url));
 }
