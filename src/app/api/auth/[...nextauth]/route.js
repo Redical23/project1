@@ -1,8 +1,8 @@
-// pages/api/auth/[...nextauth].js
+// src/app/api/auth/[...nextauth]/route.js
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-export const authOptions = {
+const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -10,7 +10,7 @@ export const authOptions = {
       authorization: {
         params: {
           scope: "openid email profile https://www.googleapis.com/auth/calendar.events",
-          access_type: "offline", // Needed for refresh token
+          access_type: "offline",
           prompt: "consent",
         },
       },
@@ -33,4 +33,6 @@ export const authOptions = {
   session: { strategy: "jwt" },
 };
 
-export default NextAuth(authOptions);
+// App Router requires GET and POST exports
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
